@@ -76,8 +76,18 @@
   )
   
   (action pedalar
-  	:parameters()
-    :precondition()
-    :effect()
+  	:parameters(?who - pessoa ?to ?from - estacoes ?bike - bicicleta)
+    :precondition(and (with ?who)
+                      (not (free ?bike ?to))
+                      (not (free ?bike ?from))
+                      (ocupied ?who ?bike)
+                      (at ?who ?to)
+                      (adj ?to ?from)
+                  )
+
+    :effect(and (at ?who ?from)
+                (not (at ?who ?to))
+
+            )
   )
 ) 
