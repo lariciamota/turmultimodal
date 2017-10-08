@@ -9,12 +9,15 @@
     (ocupied ?who - pessoa ?bike - bicicleta)
     (visit ?who - pessoa ?which - pontos)
     (with ?who - pessoa) ;esta com bicicleta
+    (wait-5 ?who - pessoa)
+    (wait-30 ?which - bicicleta)
   )
   (:action pegar-bicicleta
   	:parameters (?who - pessoa ?where - estacoes ?bike - bicicleta)
     :precondition (and  (not (with ?who))
                         (free ?bike ?where)
                         (at ?who ?where)
+                        (not (wait-5 ?who))
                   )
     :effect (and  (with ?who)
                   (at ?who ?where)
@@ -32,29 +35,31 @@
                 (at ?who ?where)
                 (free ?bike ?where)
                 (not (ocupied ?who ?bike))
+                (wait-5 ?who)
             )
   )
   
   (action esperar5min
-  	:parameters()
-    :precondition()
-    :effect()
+  	:parameters(?who - pessoa ?where - estacoes)
+    :precondition(and (at ?who ?where)
+                      (not (with ?who))
+                      (wait-5 ?who)
+                  )
+    :effect(not (wait-5 ?who))
   )
   
   (action caminhar
   	:parameters(?who - pessoa ?where - estacoes ?which - pontos)
-    :precondition((and (not (with ?who)
-                  )
-                  (or (at ?who ?where)
-                      (at ?who ?which)
-                  )
+    :precondition(and (not (with ?who))
+                    (or (at ?who ?where)
+                        (at ?who ?which)
+                    )
+                    (adj-2 ?where ?which)
                   )
     :effect((or (and (not (at ?who ?where))
-                     (adj-2 ?where ?which) 
                      (at ?who ?which)
                 )
                 (and  (not (at ?who ?which))
-                      (adj-2 ?where ?which)
                       (at ?who ?where)
                 )
             )
@@ -62,17 +67,12 @@
   )
   
   (action visitar-ponto
-  	:parameters(?who - pessoa ?where - estacoes ?which - pontos)
+  	:parameters(?who - pessoa ?which - pontos)
     :precondition(and (not (with ?who))
                       (not (visit ?who ?which))
-                      (at ?who ?where)
-                      (adj-2 ?where ?which)
+                      (at ?who ?which)
                   )
-    :effect(and (visit ?who ?which)
-                (not (at ?who ?where))
-                (at ?who ?which)
-                ;gastou 5 minutos??
-          )
+    :effect(visit ?who ?which)
   )
   
   (action pedalar
@@ -87,7 +87,6 @@
 
     :effect(and (at ?who ?from)
                 (not (at ?who ?to))
-
             )
   )
 ) 
