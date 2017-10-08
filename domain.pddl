@@ -1,6 +1,8 @@
 (define (domain turmultimodal-adl)
 	(:requirements :adl :typing :disjunctive-preconditions) 
+
   (:types pessoa bicicleta estacoes pontos)
+
   (:predicates
     (adj ?estacao-1 ?estacao-2 - estacoes)
     (adj-2 ?estacao-1 - estacoes ?ponto-1 - pontos)
@@ -13,6 +15,7 @@
     (return ?who - pessoa ?bike - bicicleta)
     (wait-30 ?who)
   )
+
   (:action pegar-bicicleta
   	:parameters (?who - pessoa ?where - estacoes ?bike - bicicleta)
     :precondition (and  (not (with ?who))
@@ -26,6 +29,26 @@
                   (ocupied ?who ?bike)
             )
   )
+
+  (:action pedalar
+    :parameters(?who - pessoa ?to ?from - estacoes ?bike - bicicleta)
+    :precondition(and (with ?who)
+                      (not (free ?bike ?to))
+                      (not (free ?bike ?from))
+                      (ocupied ?who ?bike)
+                      (at ?who ?to)
+                      (adj ?to ?from)
+                      (not (return ?who ?bike))
+                      (wait-30 ?who)
+                  )
+
+    :effect(and (at ?who ?from)
+                (not (at ?who ?to))
+                (return ?who ?bike)
+                (not (wait-30 ?who))
+            )
+  )
+
   (:action entregar-bicicleta
   	:parameters(?who - pessoa ?where - estacoes ?bike - bicicleta)
     :precondition(and (with ?who)
@@ -62,6 +85,7 @@
                 (not (at ?who ?where))
             )
   )
+
   (:action voltar
     :parameters(?who -pessoa ?where - estacoes ?which - pontos)
     :precondition(and (not (with ?who))
@@ -81,23 +105,5 @@
                   )
     :effect(visit ?who ?which)
   )
-  
-  (:action pedalar
-  	:parameters(?who - pessoa ?to ?from - estacoes ?bike - bicicleta)
-    :precondition(and (with ?who)
-                      (not (free ?bike ?to))
-                      (not (free ?bike ?from))
-                      (ocupied ?who ?bike)
-                      (at ?who ?to)
-                      (adj ?to ?from)
-                      (not (return ?who ?bike))
-                      (wait-30 ?who)
-                  )
 
-    :effect(and (at ?who ?from)
-                (not (at ?who ?to))
-                (return ?who ?bike)
-                (not (wait-30 ?who))
-            )
-  )
 ) 

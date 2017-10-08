@@ -1,11 +1,13 @@
 (define (problem turmultimodal-adl-1)
   	(:domain turmultimodal-adl)
+    
     (:objects
     	Jose Maria Joao - pessoa
     	PR CA PD A SJ SR - estacoes 
     	PRp BBp PAp SJp NSRp - pontos
         bike-1 bike-2 bike-3 bike-4 bike-5 bike-6 bike-7 bike-8 - bicicleta
     )
+
     (:init
     	(adj PR CA) (adj CA PR)
     	(adj PR PD) (adj PD PR)
@@ -32,6 +34,7 @@
         (free bike-8 SR)
     	
     )
+
     (:goal (and 
     (visit Jose PRp) (visit Jose BBp) (visit Jose PAp) (visit Jose SJp) (visit Jose NSRp) 
     (visit Maria PRp) (visit Maria BBp) (visit Maria PAp) (visit Maria SJp) (visit Maria NSRp) 
