@@ -4,7 +4,7 @@
     	Jose Maria Joao - pessoa
     	PR CA PD A SJ SR - estacoes 
     	PRp BBp PAp SJp NSRp - pontos
-
+        bike-1 bike-2 bike-3 bike-4 bike-5 bike-6 bike-7 bike-8 - bicicleta
     )
     (:init
     	(adj PR CA) (adj CA PR)
@@ -22,19 +22,28 @@
     	(at Jose CA)
     	(at Maria A)
     	(at Joao PD)
-    	(= (howMany A) 0)
-    	(= (howMany PR) 1)
-    	(= (howMany CA) 1)
-    	(= (howMany PD) 1)
-    	(= (howMany SJ) 2)
-    	(= (howMany SR) 3)
+        (free bike-1 PR)
+        (free bike-2 CA)
+        (free bike-3 PD)
+        (free bike-4 SJ)
+        (free bike-5 SJ)
+        (free bike-6 SR)
+        (free bike-7 SR)
+        (free bike-8 SR)
+    	
     )
     (:goal (and 
     (visit Jose PRp) (visit Jose BBp) (visit Jose PAp) (visit Jose SJp) (visit Jose SRp) 
     (visit Maria PRp) (visit Maria BBp) (visit Maria PAp) (visit Maria SJp) (visit Maria SRp) 
     (visit Joao PRp) (visit Joao BBp) (visit Joao PAp) (visit Joao SJp) (visit Joao SRp) 
     (not (with Jose)) (not (with Maria)) (not (with Joao))
-    
-    )
+    (or (free bike-1 PR) (free bike-1 CA) (free bike-1 PD) (free bike-1 A) (free bike-1 SJ) (free bike-1 SR))
+    (or (free bike-2 PR) (free bike-2 CA) (free bike-2 PD) (free bike-2 A) (free bike-2 SJ) (free bike-2 SR))
+    (or (free bike-3 PR) (free bike-3 CA) (free bike-3 PD) (free bike-3 A) (free bike-3 SJ) (free bike-3 SR))
+    (or (free bike-4 PR) (free bike-4 CA) (free bike-4 PD) (free bike-4 A) (free bike-4 SJ) (free bike-4 SR))
+    (or (free bike-5 PR) (free bike-5 CA) (free bike-5 PD) (free bike-5 A) (free bike-5 SJ) (free bike-5 SR))
+    (or (free bike-6 PR) (free bike-6 CA) (free bike-6 PD) (free bike-6 A) (free bike-6 SJ) (free bike-6 SR))
+    (or (free bike-7 PR) (free bike-7 CA) (free bike-7 PD) (free bike-7 A) (free bike-7 SJ) (free bike-7 SR))
+    (or (free bike-8 PR) (free bike-8 CA) (free bike-8 PD) (free bike-8 A) (free bike-8 SJ) (free bike-8 SR))
     )
 )

@@ -5,31 +5,33 @@
     (adj ?estacao-1 ?estacao-2 - estacoes)
     (adj-2 ?estacao-1 - estacoes ?ponto-1 - pontos)
     (at ?who - pessoa ?where)
-    (howMany ?estacao-1 - estacao)
+    (free ?bicicleta-1 - bicicleta ?estacao-1 - estacoes)
+    (ocupied ?who - pessoa ?bike - bicicleta)
     (visit ?who - pessoa ?which - pontos)
     (with ?who - pessoa) ;esta com bicicleta
   )
   (:action pegar-bicicleta
-  	:parameters (?who - pessoa ?where - estacoes)
+  	:parameters (?who - pessoa ?where - estacoes ?bike - bicicleta)
     :precondition (and  (not (with ?who))
-                        (not (= (howMany ?where) 0))
+                        (free ?bike ?where)
                         (at ?who ?where)
                   )
     :effect (and  (with ?who)
                   (at ?who ?where)
-                  (- (howMany ?where) 1) ;como subtrai??
-
+                  (not (free ?bike ?where))
+                  (ocupied ?who ?bike)
             )
   )
   (action entregar-bicicleta
-  	:parameters(?who - pessoa ?where - estacoes)
+  	:parameters(?who - pessoa ?where - estacoes ?bike - bicicleta)
     :precondition(and (with ?who)
                       (at ?who ?where)
+                      (ocupied ?who ?bike)
                   )
     :effect(and (not (with ?who))
                 (at ?who ?where)
-                (+ (howMany ?where) 1) ;como soma??
-
+                (free ?bike ?where)
+                (not (ocupied ?who ?bike))
             )
   )
   
