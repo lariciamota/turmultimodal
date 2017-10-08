@@ -25,7 +25,7 @@
                   (ocupied ?who ?bike)
             )
   )
-  (action entregar-bicicleta
+  (:action entregar-bicicleta
   	:parameters(?who - pessoa ?where - estacoes ?bike - bicicleta)
     :precondition(and (with ?who)
                       (at ?who ?where)
@@ -39,7 +39,7 @@
             )
   )
   
-  (action esperar5min
+  (:action esperar5min
   	:parameters(?who - pessoa ?where - estacoes)
     :precondition(and (at ?who ?where)
                       (not (with ?who))
@@ -48,7 +48,7 @@
     :effect(not (wait-5 ?who))
   )
   
-  (action caminhar
+  (:action caminhar
   	:parameters(?who - pessoa ?where - estacoes ?which - pontos)
     :precondition(and (not (with ?who))
                     (or (at ?who ?where)
@@ -56,17 +56,18 @@
                     )
                     (adj-2 ?where ?which)
                   )
-    :effect((or (and (not (at ?who ?where))
+    :effect(or ((and (not (at ?who ?where))
                      (at ?who ?which)
                 )
                 (and  (not (at ?who ?which))
                       (at ?who ?where)
                 )
-            )
+              )
+            
           )
   )
   
-  (action visitar-ponto
+  (:action visitar-ponto
   	:parameters(?who - pessoa ?which - pontos)
     :precondition(and (not (with ?who))
                       (not (visit ?who ?which))
@@ -75,7 +76,7 @@
     :effect(visit ?who ?which)
   )
   
-  (action pedalar
+  (:action pedalar
   	:parameters(?who - pessoa ?to ?from - estacoes ?bike - bicicleta)
     :precondition(and (with ?who)
                       (not (free ?bike ?to))

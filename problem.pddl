@@ -1,4 +1,4 @@
-(define (turmultimodal-adl-1)
+(define (problem turmultimodal-adl-1)
   	(:domain turmultimodal-adl)
     (:objects
     	Jose Maria Joao - pessoa
@@ -33,9 +33,9 @@
     	
     )
     (:goal (and 
-    (visit Jose PRp) (visit Jose BBp) (visit Jose PAp) (visit Jose SJp) (visit Jose SRp) 
-    (visit Maria PRp) (visit Maria BBp) (visit Maria PAp) (visit Maria SJp) (visit Maria SRp) 
-    (visit Joao PRp) (visit Joao BBp) (visit Joao PAp) (visit Joao SJp) (visit Joao SRp) 
+    (visit Jose PRp) (visit Jose BBp) (visit Jose PAp) (visit Jose SJp) (visit Jose NSRp) 
+    (visit Maria PRp) (visit Maria BBp) (visit Maria PAp) (visit Maria SJp) (visit Maria NSRp) 
+    (visit Joao PRp) (visit Joao BBp) (visit Joao PAp) (visit Joao SJp) (visit Joao NSRp) 
     (not (with Jose)) (not (with Maria)) (not (with Joao))
     (or (free bike-1 PR) (free bike-1 CA) (free bike-1 PD) (free bike-1 A) (free bike-1 SJ) (free bike-1 SR))
     (or (free bike-2 PR) (free bike-2 CA) (free bike-2 PD) (free bike-2 A) (free bike-2 SJ) (free bike-2 SR))
@@ -46,4 +46,5 @@
     (or (free bike-7 PR) (free bike-7 CA) (free bike-7 PD) (free bike-7 A) (free bike-7 SJ) (free bike-7 SR))
     (or (free bike-8 PR) (free bike-8 CA) (free bike-8 PD) (free bike-8 A) (free bike-8 SJ) (free bike-8 SR))
     )
+)
 )
